@@ -23,6 +23,19 @@ env/
 # User feedback
 feedback.csv
 
+# ML models
+*.keras
+*.h5
+*.pkl
+model/*.keras
+model/*.pkl
+
+# Datasets
+train/
+test/
+valid/
+datasets/
+
 # OS files
 .DS_Store
 Thumbs.db
