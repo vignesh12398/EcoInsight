@@ -51,7 +51,7 @@ CarbonAI is a Streamlit web app that combines **Machine Learning** and **Deep Le
 | ML | scikit-learn, XGBoost |
 | DL | TensorFlow / Keras (MobileNetV2) |
 | Data | Pandas, NumPy |
-| Utilities | Joblib, Plotly, OpenPyXL |
+| Utilities | Joblib |
 
 ---
 
@@ -105,8 +105,13 @@ The app will open in your browser at `http://localhost:8501`.
    This saves the final model to `model/carbon_model.pkl`.
 
 ### Waste classification model
-The MobileNetV2-based classifier (`mobilenet_finetuned_best.keras`) is fine-tuned separately in google colab and model was saved.
+Dataset: sourced from Kaggle.
 
+The classifier was built in three stages (see carbon_footprint.ipynb for the full experimentation and training workflow):
+
+1.Baseline CNN — a simple convolutional network trained from scratch to establish a performance baseline.
+2.Transfer learning (frozen MobileNetV2) — MobileNetV2 pretrained on ImageNet used as a frozen feature extractor, with a custom classification head trained on top.
+3.Fine-tuning — top layers of MobileNetV2 unfrozen and trained at a low learning rate to adapt the pretrained features to the waste dataset, producing the final model saved as mobilenet_finetuned_best.keras.
 ---
 
 ## 📊 Input Features (Carbon Footprint Calculator)
