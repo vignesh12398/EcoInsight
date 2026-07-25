@@ -10,10 +10,13 @@ import pandas  as pd
 import os
 from datetime import datetime as dt
 
-waste_model = load_model("model/mobilenet_finetuned_best.keras")
-waste_model.summary()
-print(waste_model.output_shape)
-print("Model loaded successfully!")
+@st.cache_resource
+def load_models():
+  waste_model = load_model("model/mobilenet_finetuned_best.keras")
+  ml = joblib.load("model/carbon_model.pkl")
+  encoders = joblib.load("model/encoders.pkl")
+  return waste_model, ml, encoders
+waste_model, ml, encoders = load_models()
 st.set_page_config(page_title="Carbon Footprint Predictor",
                    page_icon="🌍",
                    layout="wide")
@@ -171,8 +174,7 @@ with st.sidebar:
     st.markdown("🔴 High — above 2,500 kg CO₂")
     st.divider()
     st.caption("Built with Streamlit • Powered by your trained ML model")
-ml = joblib.load("model/carbon_model.pkl")
-encoders = joblib.load("model/encoders.pkl")
+
 # ===========================
 # User Inputs
 # ===========================
