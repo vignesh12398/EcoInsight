@@ -664,70 +664,76 @@ if page == "♻️ Waste Classification":
 
                     st.session_state.show_feedback = False
 
-if page=="📊 Feedback (Admin)":
+if page == "📊 Feedback (Admin)":
     st.markdown("""
-            <style>
-            .feedback-header {
-                background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
-                padding: 20px 25px;
-                border-radius: 12px;
-                margin-bottom: 25px;
-            }
-            .feedback-header h1 {
-                color: white;
-                font-size: 28px;
-                margin: 0;
-            }
-            div[data-testid="stMetric"] {
-                background-color: #1a1a1a;
-                border: 1px solid #333333;
-                border-radius: 12px;
-                padding: 18px 15px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            }
-            div[data-testid="stMetricLabel"] {
-                font-weight: 600;
-                color: #b0b0b0 !important;
-            }
-            div[data-testid="stMetricLabel"] p {
-                color: #b0b0b0 !important;
-            }
-            div[data-testid="stMetricValue"] {
-                font-size: 30px;
-                font-weight: 700;
-                color: #ffffff !important;
-            }
-            div[data-testid="stDataFrame"] {
-                border: 1px solid #333333;
-                border-radius: 10px;
-                overflow: hidden;
-            }
-            </style>
-            <div class="feedback-header">
-                <h1>📊 Feedback (Admin)</h1>
-            </div>
-        """, unsafe_allow_html=True)
+        <style>
+        .feedback-header {
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+        .feedback-header h1 {
+            color: white;
+            font-size: 28px;
+            margin: 0;
+        }
+        div[data-testid="stMetric"] {
+            background-color: #1a1a1a;
+            border: 1px solid #333333;
+            border-radius: 12px;
+            padding: 18px 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        div[data-testid="stMetricLabel"] {
+            font-weight: 600;
+            color: #b0b0b0 !important;
+        }
+        div[data-testid="stMetricLabel"] p {
+            color: #b0b0b0 !important;
+        }
+        div[data-testid="stMetricValue"] {
+            font-size: 30px;
+            font-weight: 700;
+            color: #ffffff !important;
+        }
+        div[data-testid="stDataFrame"] {
+            border: 1px solid #333333;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        </style>
+
+        <div class="feedback-header">
+            <h1>📊 Feedback (Admin)</h1>
+        </div>
+    """, unsafe_allow_html=True)
+
     if os.path.exists("feedback.csv"):
-    df = pd.read_csv("feedback.csv")
+        df = pd.read_csv("feedback.csv")
     else:
-    df = pd.DataFrame(
-        columns=[
-            "Timestamp",
-            "Prediction Class",
-            "Correct Class",
-            "Confidence"
-        ]
-    )
+        df = pd.DataFrame(
+            columns=[
+                "Timestamp",
+                "Prediction Class",
+                "Correct Class",
+                "Confidence"
+            ]
+        )
+
     if df.empty:
-    st.info("No feedback has been submitted yet.")
+        st.info("No feedback has been submitted yet.")
     else:
-    st.dataframe(df, use_container_width=True)
-    total_feedback=len(df)
-    correct_predicted=(df["Prediction Class"] == df["Correct Class"]).sum()
-    wrong_predicted=total_feedback-correct_predicted
-    col1,col2,col3 = st.columns(3)
-    col1.metric("Total Feedback",total_feedback)
-    col2.metric("Correct Prediction",correct_predicted)
-    col3.metric("Wrong Prediction",wrong_predicted)
-    st.divider()
-    st.dataframe(df,use_container_width=True)
+        total_feedback = len(df)
+        correct_predicted = (
+            df["Prediction Class"] == df["Correct Class"]
+        ).sum()
+        wrong_predicted = total_feedback - correct_predicted
+
+        col1, col2, col3 = st.columns(3)
+        col1.metric("Total Feedback", total_feedback)
+        col2.metric("Correct Prediction", correct_predicted)
+        col3.metric("Wrong Prediction", wrong_predicted)
+
+        st.divider()
+        st.dataframe(df, use_container_width=True)
