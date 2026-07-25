@@ -249,8 +249,8 @@ if page == "🏠 Home":
             <div style="background:#131e2a; padding:20px; border-radius:12px; 
                         border:1px solid #3f7fd6; height:230px;">
                 <h4 style="color:#7cb3ff;">♻️ AI Waste Classification</h4>
-                <p style="color:#dce6f0;">Upload a photo of waste and let a MobileNetV2-based CNN
-                classify it as Organic or Recyclable in real time.</p>
+                <p style="color:#dce6f0;">Upload an image of waste and our fine-tuned MobileNetV2 model will classify it into one of six categories:
+**Cardboard, Glass, Metal, Organic, Paper, or Plastic.*</p>
                 <p style="color:#dce6f0;"><b>✔ Image-based detection</b><br>
                 <b>✔ Encourages correct disposal</b></p>
             </div>
