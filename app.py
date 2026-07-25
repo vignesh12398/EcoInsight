@@ -707,7 +707,21 @@ if page=="📊 Feedback (Admin)":
                 <h1>📊 Feedback (Admin)</h1>
             </div>
         """, unsafe_allow_html=True)
-    df=pd.read_csv("feedback.csv")
+    if os.path.exists("feedback.csv"):
+    df = pd.read_csv("feedback.csv")
+    else:
+    df = pd.DataFrame(
+        columns=[
+            "Timestamp",
+            "Prediction Class",
+            "Correct Class",
+            "Confidence"
+        ]
+    )
+    if df.empty:
+    st.info("No feedback has been submitted yet.")
+    else:
+    st.dataframe(df, use_container_width=True)
     total_feedback=len(df)
     correct_predicted=(df["Prediction Class"] == df["Correct Class"]).sum()
     wrong_predicted=total_feedback-correct_predicted
