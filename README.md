@@ -18,6 +18,7 @@ CarbonAI is a Streamlit web app that combines **Machine Learning** and **Deep Le
 ---
 
 ## 🗂 Project Structure
+[![Architecture diagram of vignesh12398/ecoinsight](https://gitdiagram.com/vignesh12398/ecoinsight/diagram.png)](https://gitdiagram.com/vignesh12398/ecoinsight?utm_source=readme&utm_medium=picture)
 
 ```
 .
